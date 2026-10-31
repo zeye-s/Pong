@@ -1,0 +1,17 @@
+#gameBoard{
+    text-align: center;
+    border: 2px solid black;
+}
+
+body{
+    text-align:center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#reset{
+    width:200px;
+    height: 100px;
+    font-size: 26px;
+    cursor:pointer;
+    border-radius: 20px;
+}
