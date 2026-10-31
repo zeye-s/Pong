@@ -75,11 +75,67 @@ function drawPaddle(){
     ctx.strokeRect(player2.x, player2.y, player2.width, player2.height);
 };
 
-function drawBall(ballX, ballY){};
+function createBall(){
+    ballSpeed = 1;
+    if(Math.round(Math.random())== 1){
+        directionX = 1;
+    }
+    else{
+        directionX = -1;
+    }
+
+    if(Math.round(Math.random())== 1){
+        directionY = 1;
+    }
+    else{
+        directionY = -1;
+    }
+    ballX = width/2;
+    ballY = height/2;
+
+    drawBall(ballX, ballY);
+};
+
+function drawBall(ballX, ballY){
+    ctx.fillStyle = ballColor;
+    ctx.beginPath();
+    ctx.arc(ballX, ballY, ballSize, 0, 2 * Math.PI);
+};
 
 function moveBall(){};
 
-function changeDirection(){};
+
+function changeDirection(event){
+    const keyPress = event.keyCode;
+    const p1Up = 87;
+    const p1Down = 83;
+    const p2Up = 38;
+    const p2Down = 40;
+
+    switch(keyPress){
+        case (p1Up):
+            if(player1.y > 0){
+                player1.y -= paddleSpeed;
+            }
+            break;
+        case (p1Down):
+            if(player1.y < height - player1.height){
+                player1.y += paddleSpeed;
+            }
+            break;
+
+        case(p2Up):
+            if(player2.y > 0){
+                player2.y -= paddleSpeed;
+            }
+            break;
+        case(p2Down):
+            if(player2.y < height - player2.height){
+                player2.y += paddleSpeed;
+            }
+            break;
+    }
+};
 
 function checkCollision(){};
 
