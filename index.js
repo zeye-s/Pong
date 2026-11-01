@@ -133,7 +133,15 @@ function createBall(){
 };
 
 function drawBall(ballX, ballY){
-    ctx.fillStyle = ballColor;
+    if(ballSpeed >= 1 && ballSpeed <= 3){
+        ctx.fillStyle = ballColor;
+    }
+    else if(ballSpeed < 1){
+        ctx.fillStyle = "lightblue";
+    }
+    else if (ballSpeed >= 3){
+        ctx.fillStyle = "orange";
+    }
     ctx.beginPath();
     ctx.arc(ballX, ballY, ballSize, 0, 2 * Math.PI);
     ctx.fill();
@@ -184,8 +192,13 @@ function checkCollision(){
         directionY *= -1;
     }
     if(ballX <= 0 + ballSize){
-        player2Score += 1;
-        ballSpeed = 1;
+        if(!frenzy){
+            player2Score += 1;
+            ballSpeed = 1;
+        }
+        else if(frenzy){
+            ballSpeed = 5;
+        }
         createBall();
     }
     if(ballX >= Width - ballSize){
@@ -198,9 +211,19 @@ function checkCollision(){
 
     if(ballX <= player1.x + player1.width + ballSize){
         if(ballY > player1.y && ballY < player1.y + player1.height){
-            ballX = player1.x + player1.width + ballSize;
-            directionX *= -1;
-            ballSpeed += 0.5;
+            if(!explode){
+                ballX = player1.x + player1.width + ballSize;
+                directionX *= -1;
+                ballSpeed += 0.5;
+            }
+            else if (explode){
+                ctx.fillStyle = "red";
+                ctx.beginPath();
+                player1Score -= 2;
+                updateScore();
+                explode = false;
+            }
+            
         }
     }
     if(ballX > player2.x - ballSize){
@@ -235,6 +258,8 @@ let defaultSpeed = 50;
 let p1Cooldown = 0;
 let p2Cooldown = 0;
 let grace = false;
+let frenzy = false;
+let explode = false;
 
 p1a1Button.addEventListener("click", selectAbilityP1A1);
 
@@ -342,6 +367,7 @@ function p1a2(){
         player1InCd = true;
         p1Cooldown = 60;
         P1Status.textContent = p1Cooldown + "s";
+        ballSpeed = 0.5;
         let countdown = setInterval(() => {
             p1Cooldown --;
             P1Status.textContent = p1Cooldown + "s";
@@ -352,17 +378,44 @@ function p1a2(){
                 countdown = undefined;
             }
         }, 1000);
+
+        let p1a2Timeout = setTimeout(()=>{
+            ballSpeed += 0.1;
+            p1a2Timeout= undefined;
+        }, 1000);
     }
 }
 
 function p1a3(){
     if(!player1InCd){
+        frenzy = true;
+        ballSpeed = 5;
 
+        player1InCd = true;
+        p1Cooldown = 60;
+        P1Status.textContent = p1Cooldown + "s";
+        let countdown = setInterval(() => {
+            p1Cooldown --;
+            P1Status.textContent = p1Cooldown + "s";
+            if(p1Cooldown <= 0){
+                player1InCd = false;
+                P1Status.textContent = "Ready";
+                clearInterval(countdown);
+                countdown = undefined;
+            }
+        }, 1000);
+
+        let p1a3Timeout = setTimeout(()=>{
+            frenzy = false;
+            p1a3Timeout = undefined;
+        }, 1000);
     }
 }
 
 function p2a1(){
     if(!player2InCd){
+        player2.height = 250;
+
         player2InCd = true;
         p2Cooldown = 60;
         P2Status.textContent = p2Cooldown + "s";
@@ -376,11 +429,18 @@ function p2a1(){
                 countdown = undefined;
             }
         }, 1000);
+
+        let p2a1Timeout = setTimeout(()=>{
+            player2.height = 100;
+            p2a1Timeout = undefined;
+        },10000);
     }
 }
 
 function p2a2(){
     if(!player2InCd){
+        explode = true;
+
         player2InCd = true;
         p2Cooldown = 60;
         P2Status.textContent = p2Cooldown + "s";
@@ -394,6 +454,7 @@ function p2a2(){
                 countdown = undefined;
             }
         }, 1000);
+
     }
 }
 
@@ -418,6 +479,6 @@ function p2a3(){
         p2a3Timeout = setTimeout(() => {
             grace = false;
             p2a3Timeout = undefined;
-        }, 3000);
+        }, 5000);
     }
 }
