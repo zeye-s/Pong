@@ -268,7 +268,7 @@ let explode = false;
 let maxCooldown = 60;
 let timePassed = 0;
 let timePassed2 = 0;
-let percentage = (timePassed/ maxCooldown) * 100;
+let percentage = 100;
 
 p1a1Button.addEventListener("click", selectAbilityP1A1);
 
@@ -358,6 +358,7 @@ function p1a1(){
         let countdown = setInterval(() => {
             p1Cooldown --;
             timePassed = maxCooldown - p1Cooldown;
+            percentage = (timePassed/ maxCooldown) * 100;
             player1Bar.style.width = percentage + "%";
             P1Status.textContent = p1Cooldown + "s";
             if(p1Cooldown <= 0){
@@ -389,6 +390,7 @@ function p1a2(){
         let countdown = setInterval(() => {
             p1Cooldown --;
             timePassed = maxCooldown - p1Cooldown;
+            percentage = (timePassed/ maxCooldown) * 100;
             player1Bar.style.width = percentage + "%";
             P1Status.textContent = p1Cooldown + "s";
             if(p1Cooldown <= 0){
@@ -421,6 +423,7 @@ function p1a3(){
         let countdown = setInterval(() => {
             p1Cooldown --;
             timePassed = maxCooldown - p1Cooldown;
+            percentage = (timePassed/ maxCooldown) * 100;
             player1Bar.style.width = percentage + "%";
             P1Status.textContent = p1Cooldown + "s";
             if(p1Cooldown <= 0){
@@ -453,6 +456,7 @@ function p2a1(){
         let countdown = setInterval(() => {
             p2Cooldown --;
             timePassed2 = maxCooldown - p2Cooldown;
+            percentage = (timePassed/ maxCooldown) * 100;
             player2Bar.style.width = percentage + "%";
             P2Status.textContent = p2Cooldown + "s";
             if(p2Cooldown <= 0){
@@ -483,6 +487,7 @@ function p2a2(){
         let countdown = setInterval(() => {
             p2Cooldown --;
             timePassed2 = maxCooldown - p2Cooldown;
+            percentage = (timePassed/ maxCooldown) * 100;
             player2Bar.style.width = percentage + "%";
             P2Status.textContent = p2Cooldown + "s";
             if(p2Cooldown <= 0){
@@ -510,6 +515,7 @@ function p2a3(){
         let countdown = setInterval(() => {
             p2Cooldown --;
             timePassed2 = maxCooldown - p2Cooldown;
+            percentage = (timePassed/ maxCooldown) * 100;
             player2Bar.style.width = percentage + "%";
             P2Status.textContent = p2Cooldown + "s";
             if(p2Cooldown <= 0){
@@ -521,7 +527,7 @@ function p2a3(){
                 countdown = undefined;
             }
         }, 1000);
-        
+
         p2a3Timeout = setTimeout(() => {
             grace = false;
             p2a3Timeout = undefined;
