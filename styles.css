@@ -59,6 +59,23 @@ td,th,tr{
 
 }
 
+#guideContainer h1, h2, h3, h5{
+    font-weight:bold;
+}
+
+#guideContainer h1{
+    font-size: 50px;
+}
+
+#guideContainer h3{
+    font-size:45px;
+}
+#guideContainer{
+    font-size:25px;
+    margin:auto;
+    width: 50%;
+}
+
 #AbilitySelector button{
     background-color:black;
     color:white;
