@@ -54,8 +54,8 @@ Button{
 td,th,tr{
     font-size:15px;
     border:2px solid white;
-    width: 150px;
-    height:150px;
+    width: 100px;
+    height:100px;
 
 }
 
@@ -72,14 +72,19 @@ td,th,tr{
     font-size:20px;
 }
 
-.P1.selected{
-     text-decoration:underline;
+.P1.selected, .P2.selected{
+    box-shadow:0 0 5px white, 0 0 10px skyblue, 0 0 15px aquamarine, 0 0 20px aqua;
+    border-radius:10px;
     font-size:30px;
+    padding:10px;
+    font-weight:bold;
+}
+.P1,.P2{
+    margin-top:10px;
 }
 
-.P2.selected{
-     text-decoration:underline;
-    font-size:30px;
+#P2A2{
+    width:70%;
 }
 
 .barContainer{

@@ -247,8 +247,8 @@ const p1a3Button = document.querySelector("#P1A3");
 const p2a1Button = document.querySelector("#P2A1");
 const p2a2Button = document.querySelector("#P2A2");
 const p2a3Button = document.querySelector("#P2A3");
-const P1 = document.querySelectorAll("#P1");
-const P2 = document.querySelectorAll("#P2");
+const P1 = document.querySelectorAll(".P1");
+const P2 = document.querySelectorAll(".P2");
 const P1Status = document.querySelector("#P1Status");
 const P2Status = document.querySelector("#P2Status");
 const player1Bar = document.querySelector("#player1Bar");
@@ -534,3 +534,4 @@ function p2a3(){
         }, 5000);
     }
 }
+z
