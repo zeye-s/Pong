@@ -10,9 +10,9 @@ const player1Color = "red";
 const player2Color = "lightblue";
 const ballColor = "white";
 const ballSize = 10;
-const player1Speed = 50;
-const player2Speed = 50;
 
+let player1Speed = 50;
+let player2Speed = 50;
 let intervalID;
 let ballSpeed = 1;
 let ballX = Width/2;
@@ -21,6 +21,7 @@ let directionX = 0;
 let directionY = 0;
 let player1Score = 0;
 let player2Score = 0;
+
 let player1 = {
     width: 25,
     height:100,
@@ -71,6 +72,13 @@ function resetGame(){
     player1Score = 0;
     player2Score = 0;
     ballSpeed = 0;
+    player1InCd = false;
+    player2InCd = false;
+    grace = false;
+    P1Status.textContent = "Ready";
+    P2Status.textContent = "Ready";
+    p1Cooldown = 0;
+    p2Cooldown = 0;
 
     player1 = {
         width: 25,
@@ -181,7 +189,9 @@ function checkCollision(){
         createBall();
     }
     if(ballX >= Width - ballSize){
-        player1Score += 1;
+        if(!grace){
+            player1Score += 1;
+        }
         ballSpeed = 1;
         createBall();
     }
@@ -214,6 +224,17 @@ const p2a2Button = document.querySelector("#P2A2");
 const p2a3Button = document.querySelector("#P2A3");
 const P1 = document.querySelectorAll("#P1");
 const P2 = document.querySelectorAll("#P2");
+const P1Status = document.querySelector("#P1Status");
+const P2Status = document.querySelector("#P2Status");
+
+let player1Ability = p1a1Button;
+let player2Ability = p2a1Button;
+let player1InCd = false;
+let player2InCd = false;
+let defaultSpeed = 50;
+let p1Cooldown = 0;
+let p2Cooldown = 0;
+let grace = false;
 
 p1a1Button.addEventListener("click", selectAbilityP1A1);
 
@@ -243,8 +264,7 @@ P2.forEach(button => {
     });
 })
 
-let player1Ability = p1a1Button;
-let player2Ability = p2a1Button;
+
 
 function selectAbilityP1A1(){
     player1Ability = p1a1Button;
@@ -267,8 +287,7 @@ function selectAbilityP2A3(){
 }
 
 function ActivateAbility(event){
-    let keyPressed = event.keyCode;
-    if(keyPressed == 68){
+    if(event.key == "d"){
         if(player1Ability == p1a1Button){
             p1a1();
         }
@@ -279,7 +298,7 @@ function ActivateAbility(event){
             p1a3();
         }
     }
-    if(keyPressed == 76){  
+    if(event.key == "l"){
         if(player2Ability == p2a1Button){
             p2a1();
         }
@@ -292,31 +311,113 @@ function ActivateAbility(event){
     }
 }
 
-let player1InCd = false;
-let player2InCd = false;
-let defaultSpeed = 50;
+
 function p1a1(){
     if(!player1InCd){
         player1InCd = true;
         player2Speed = 0;
-        setTimeout(() => {
+
+        p1Cooldown = 60;
+        P1Status.textContent = p1Cooldown + "s";
+        let countdown = setInterval(() => {
+            p1Cooldown --;
+            P1Status.textContent = p1Cooldown + "s";
+            if(p1Cooldown <= 0){
+                player1InCd = false;
+                P1Status.textContent = "Ready";
+                clearInterval(countdown);
+                countdown = undefined;
+            }
+        }, 1000);
+
+        p1a1Timeout = setTimeout(() => {
             player2Speed = defaultSpeed;
+            p1a1Timeout = undefined;
         }, 5000);
-        
-        setTimeout(()=> {
-            player1InCd = false;
-        }, 60000);
     }
 }
 
 function p1a2(){
-
+    if(!player1InCd){
+        player1InCd = true;
+        p1Cooldown = 60;
+        P1Status.textContent = p1Cooldown + "s";
+        let countdown = setInterval(() => {
+            p1Cooldown --;
+            P1Status.textContent = p1Cooldown + "s";
+            if(p1Cooldown <= 0){
+                player1InCd = false;
+                P1Status.textContent = "Ready";
+                clearInterval(countdown);
+                countdown = undefined;
+            }
+        }, 1000);
+    }
 }
 
-function p1a3(){}
+function p1a3(){
+    if(!player1InCd){
 
-function p2a1(){}
+    }
+}
 
-function p2a2(){}
+function p2a1(){
+    if(!player2InCd){
+        player2InCd = true;
+        p2Cooldown = 60;
+        P2Status.textContent = p2Cooldown + "s";
+        let countdown = setInterval(() => {
+            p2Cooldown --;
+            P2Status.textContent = p2Cooldown + "s";
+            if(p2Cooldown <= 0){
+                player2InCd = false;
+                P2Status.textContent = "Ready";
+                clearInterval(countdown);
+                countdown = undefined;
+            }
+        }, 1000);
+    }
+}
 
-function p2a3(){}
+function p2a2(){
+    if(!player2InCd){
+        player2InCd = true;
+        p2Cooldown = 60;
+        P2Status.textContent = p2Cooldown + "s";
+        let countdown = setInterval(() => {
+            p2Cooldown --;
+            P2Status.textContent = cooldown + "s";
+            if(p2Cooldown <= 0){
+                player2InCd = false;
+                P2Status.textContent = "Ready";
+                clearInterval(countdown);
+                countdown = undefined;
+            }
+        }, 1000);
+    }
+}
+
+function p2a3(){
+    if(!player2InCd){
+        player2InCd = true;
+        grace = true;
+
+        p2Cooldown = 60;
+        P2Status.textContent = p2Cooldown + "s";
+        let countdown = setInterval(() => {
+            p2Cooldown --;
+            P2Status.textContent = p2Cooldown + "s";
+            if(p2Cooldown <= 0){
+                player2InCd = false;
+                P2Status.textContent = "Ready";
+                clearInterval(countdown);
+                countdown = undefined;
+            }
+        }, 1000);
+
+        p2a3Timeout = setTimeout(() => {
+            grace = false;
+            p2a3Timeout = undefined;
+        }, 3000);
+    }
+}
