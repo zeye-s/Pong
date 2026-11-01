@@ -1,5 +1,6 @@
 const gameBoard = document.querySelector("#gameBoard");
 const ctx = gameBoard.getContext("2d");
+ctx.imageSmoothingEnabled = false;
 const scores = document.querySelector("#scoreText");
 const reset = document.querySelector("#reset");
 const start = document.querySelector("#start");
@@ -9,7 +10,7 @@ const gameBackground = "black";
 const player1Color = "red";
 const player2Color = "lightblue";
 const ballColor = "white";
-const ballSize = 10;
+const ballSize = 20;
 
 let player1Speed = 50;
 let player2Speed = 50;
@@ -144,8 +145,7 @@ function drawBall(ballX, ballY){
     else if (ballSpeed >= 3){
         ctx.fillStyle = "orange";
     }
-    ctx.beginPath();
-    ctx.arc(ballX, ballY, ballSize, 0, 2 * Math.PI);
+   ctx.fillRect(ballX - ballSize/2, ballY - ballSize/2, ballSize, ballSize);
     ctx.fill();
 };
 
@@ -479,6 +479,7 @@ function p2a1(){
 function p2a2(){
     if(!player2InCd){
         explode = true;
+        player2InCd = true;
 
         p2Cooldown = 60;
         player2Bar.classList.remove("ready");

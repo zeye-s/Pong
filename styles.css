@@ -1,23 +1,36 @@
 #gameBoard{
-    border: 2px solid white;
+   border: 4px solid white;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
 }
 
 body{
     text-align:center;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Press Start 2P', cursive;
     background-color: black;
     color: white;
 }
 
-#reset, #start{
+
+#reset{
     width:120px;
     height: 70px;
-    border-radius: 20px;
+    border: 4px solid #800000;
+}
+
+#reset, #start, .barContainer, Button {
+    border: 4px solid #fff;
+    image-rendering: pixelated;
+    font-family: 'Press Start 2P', cursive;
 }
 
 Button{
     font-size: 26px;
     cursor:pointer;
+}
+
+button:active {
+    transform: translate(2px, 2px);
 }
 
 #reset{
@@ -28,10 +41,12 @@ Button{
 }
 
 #start{
+     width:120px;
+    height: 70px;
     background-color:rgb(93, 253, 0);
     font-Weight:bold;
     color:rgb(8, 58, 2);
-    border: 2px solid rgb(8, 58, 2);
+    border: 4px solid #006600;
 }
 
 #startreset{
@@ -49,6 +64,10 @@ Button{
     flex-direction: row;
     justify-content: center;
     gap: 30px;
+}
+
+#AbilitySelector img {
+    image-rendering: pixelated; 
 }
 
 td,th,tr{
@@ -91,7 +110,6 @@ td,th,tr{
 
 .P1.selected, .P2.selected{
     box-shadow:0 0 5px white, 0 0 10px skyblue, 0 0 15px aquamarine, 0 0 20px aqua;
-    border-radius:10px;
     font-size:30px;
     padding:10px;
     font-weight:bold;
@@ -114,7 +132,6 @@ td,th,tr{
 .cooldownBar{
     width: 100%;
     height: 100%;
-    border-radius: 20px;
     border:2px solid white;
     transition: width 0.2s linear;
     background-color:lightskyblue;
