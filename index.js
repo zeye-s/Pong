@@ -274,3 +274,19 @@ function ActivateAbility(event){
             }
     }
 }
+
+function p1a1(){
+
+}
+
+function p1a2(){
+
+}
+
+function p1a3(){}
+
+function p2a1(){}
+
+function p2a2(){}
+
+function p2a3(){}
