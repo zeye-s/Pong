@@ -54,7 +54,7 @@ Button{
 td,th,tr{
     font-size:15px;
     border:2px solid white;
-    width: 100px;
+    width: 150px;
     height:150px;
 }
 
@@ -65,4 +65,9 @@ td,th,tr{
     font-weight:bold;
     font-size:18px;
     border:none;
+}
+
+#AbilitySelector button:hover{
+    text-decoration:underline;
+    font-size:20px;
 }

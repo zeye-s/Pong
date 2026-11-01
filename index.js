@@ -275,8 +275,13 @@ function ActivateAbility(event){
     }
 }
 
-function p1a1(){
+let player1InCd = false;
+let player2InCd = false;
 
+function p1a1(){
+    if(!player1InCd){
+        
+    }
 }
 
 function p1a2(){
