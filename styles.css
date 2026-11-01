@@ -72,7 +72,12 @@ td,th,tr{
     font-size:20px;
 }
 
-#AbilitySelector button:active{
-    text-decoration:underline;
-    font-size:20px;
+.P1.selected{
+     text-decoration:underline;
+    font-size:30px;
+}
+
+.P2.selected{
+     text-decoration:underline;
+    font-size:30px;
 }

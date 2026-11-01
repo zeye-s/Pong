@@ -140,8 +140,8 @@ function changeDirection(event){
     const keyPress = event.keyCode;
     const p1Up = 87;
     const p1Down = 83;
-    const p2Up = 38;
-    const p2Down = 40;
+    const p2Up = 73;
+    const p2Down = 75;
 
     switch(keyPress){
         case (p1Up):
@@ -212,14 +212,36 @@ const p1a3Button = document.querySelector("#P1A3");
 const p2a1Button = document.querySelector("#P2A1");
 const p2a2Button = document.querySelector("#P2A2");
 const p2a3Button = document.querySelector("#P2A3");
+const P1 = document.querySelectorAll("#P1");
+const P2 = document.querySelectorAll("#P2");
 
 p1a1Button.addEventListener("click", selectAbilityP1A1);
+
 p1a2Button.addEventListener("click", selectAbilityP1A2);
+
 p1a3Button.addEventListener("click", selectAbilityP1A3);
+
 p2a1Button.addEventListener("click", selectAbilityP2A1);
+
 p2a2Button.addEventListener("click", selectAbilityP2A2);
+
 p2a3Button.addEventListener("click", selectAbilityP2A3);
+
 window.addEventListener("keydown", ActivateAbility);
+
+P1.forEach(button => {
+    button.addEventListener("click", () => {
+        P1.forEach(btn => btn.classList.remove("selected"));
+        button.classList.add("selected");
+    });
+})
+
+P2.forEach(button => {
+    button.addEventListener("click", () => {
+        P2.forEach(btn => btn.classList.remove("selected"));
+        button.classList.add("selected");
+    });
+})
 
 let player1Ability = p1a1Button;
 let player2Ability = p2a1Button;
@@ -246,45 +268,44 @@ function selectAbilityP2A3(){
 
 function ActivateAbility(event){
     let keyPressed = event.keyCode;
-    switch(player1Ability){
-        case(p1a1Button):
-            if(keyPressed == 68){
-                p1a1();
-            }
-        case(p1a2Button):
-            if(keyPressed == 68){
-                p1a2();
-            }
-        case(p1a3Button):
-            if(keyPressed == 68){
-                p1a3();
-            }
+    if(keyPressed == 68){
+        if(player1Ability == p1a1Button){
+            p1a1();
+        }
+        else if (player1Ability == p1a2Button){
+            p1a2();
+        }
+        else if (player1Ability == p1a3Button){
+            p1a3();
+        }
     }
-    switch(player2Ability){
-        case(p2a1Button):
-            if(keyPressed == 39){  
-                p2a1();
-            }
-        case(p2a2Button):
-            if(keyPressed == 39){
-                p2a2();
-            }
-        case(p2a3Button):
-            if(keyPressed == 39){
-                p2a3();
-            }
+    if(keyPressed == 76){  
+        if(player2Ability == p2a1Button){
+            p2a1();
+        }
+        else if(player2Ability == p2a2Button){
+            p2a2();
+        }
+        else if(player2Ability == p2a3Button){
+            p2a3();
+        }
     }
 }
 
 let player1InCd = false;
 let player2InCd = false;
-
+let defaultSpeed = 50;
 function p1a1(){
     if(!player1InCd){
+        player1InCd = true;
+        player2Speed = 0;
         setTimeout(() => {
-            player2Speed = 0;
-            player1InCd = true;
+            player2Speed = defaultSpeed;
         }, 5000);
+        
+        setTimeout(()=> {
+            player1InCd = false;
+        }, 60000);
     }
 }
 
