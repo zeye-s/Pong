@@ -71,3 +71,8 @@ td,th,tr{
     text-decoration:underline;
     font-size:20px;
 }
+
+#AbilitySelector button:active{
+    text-decoration:underline;
+    font-size:20px;
+}

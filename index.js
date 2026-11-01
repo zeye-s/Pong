@@ -10,7 +10,8 @@ const player1Color = "red";
 const player2Color = "lightblue";
 const ballColor = "white";
 const ballSize = 10;
-const paddleSpeed = 50;
+const player1Speed = 50;
+const player2Speed = 50;
 
 let intervalID;
 let ballSpeed = 1;
@@ -145,23 +146,23 @@ function changeDirection(event){
     switch(keyPress){
         case (p1Up):
             if(player1.y > 0){
-                player1.y -= paddleSpeed;
+                player1.y -= player1Speed;
             }
             break;
         case (p1Down):
             if(player1.y < Height - player1.height){
-                player1.y += paddleSpeed;
+                player1.y += player1Speed;
             }
             break;
 
         case(p2Up):
             if(player2.y > 0){
-                player2.y -= paddleSpeed;
+                player2.y -= player2Speed;
             }
             break;
         case(p2Down):
             if(player2.y < Height - player2.height){
-                player2.y += paddleSpeed;
+                player2.y += player2Speed;
             }
             break;
     }
@@ -205,70 +206,70 @@ function updateScore(){
     scores.textContent = `${player1Score} : ${player2Score}`;
 };
 
-const p1a1 = document.querySelector("#P1A1");
-const p1a2 = document.querySelector("#P1A2");
-const p1a3 = document.querySelector("#P1A3");
-const p2a1 = document.querySelector("#P2A1");
-const p2a2 = document.querySelector("#P2A2");
-const p2a3 = document.querySelector("#P2A3");
+const p1a1Button = document.querySelector("#P1A1");
+const p1a2Button = document.querySelector("#P1A2");
+const p1a3Button = document.querySelector("#P1A3");
+const p2a1Button = document.querySelector("#P2A1");
+const p2a2Button = document.querySelector("#P2A2");
+const p2a3Button = document.querySelector("#P2A3");
 
-p1a1.addEventListener("click", selectAbilityP1A1);
-p1a2.addEventListener("click", selectAbilityP1A2);
-p1a3.addEventListener("click", selectAbilityP1A3);
-p2a1.addEventListener("click", selectAbilityP2A1);
-p2a2.addEventListener("click", selectAbilityP2A2);
-p2a3.addEventListener("click", selectAbilityP2A3);
+p1a1Button.addEventListener("click", selectAbilityP1A1);
+p1a2Button.addEventListener("click", selectAbilityP1A2);
+p1a3Button.addEventListener("click", selectAbilityP1A3);
+p2a1Button.addEventListener("click", selectAbilityP2A1);
+p2a2Button.addEventListener("click", selectAbilityP2A2);
+p2a3Button.addEventListener("click", selectAbilityP2A3);
 window.addEventListener("keydown", ActivateAbility);
 
-let player1Ability = p1a1;
-let player2Ability = p2a1;
+let player1Ability = p1a1Button;
+let player2Ability = p2a1Button;
 
 function selectAbilityP1A1(){
-    player1Ability = p1a1;
+    player1Ability = p1a1Button;
 }
 function selectAbilityP1A2(){
-    player1Ability = p1a2;
+    player1Ability = p1a2Button;
 }
 function selectAbilityP1A3(){
-    player1Ability = p1a3;
+    player1Ability = p1a3Button;
 }
 
 function selectAbilityP2A1(){
-    player2Ability = p2a1;
+    player2Ability = p2a1Button;
 }
 function selectAbilityP2A2(){
-    player2Ability = p2a2;
+    player2Ability = p2a2Button;
 }
 function selectAbilityP2A3(){
-    player2Ability = p2a3;
+    player2Ability = p2a3Button;
 }
 
 function ActivateAbility(event){
     let keyPressed = event.keyCode;
     switch(player1Ability){
-        case(p1a1):
+        case(p1a1Button):
             if(keyPressed == 68){
                 p1a1();
             }
-        case(p1a2):
+        case(p1a2Button):
             if(keyPressed == 68){
                 p1a2();
             }
-        case(p1a3):
+        case(p1a3Button):
             if(keyPressed == 68){
                 p1a3();
             }
     }
     switch(player2Ability){
-        case(p2a1):
+        case(p2a1Button):
             if(keyPressed == 39){  
                 p2a1();
             }
-        case(p2a2):
+        case(p2a2Button):
             if(keyPressed == 39){
                 p2a2();
             }
-        case(p2a3):
+        case(p2a3Button):
             if(keyPressed == 39){
                 p2a3();
             }
@@ -280,7 +281,10 @@ let player2InCd = false;
 
 function p1a1(){
     if(!player1InCd){
-        
+        setTimeout(() => {
+            player2Speed = 0;
+            player1InCd = true;
+        }, 5000);
     }
 }
 
