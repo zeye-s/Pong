@@ -2,8 +2,8 @@ const gameBoard = document.querySelector("#gameBoard");
 const ctx = gameBoard.getContext("2d");
 const scores = document.querySelector("#scoreText");
 const reset = document.querySelector("#reset");
-const width = gameBoard.width;
-const height = gameBoard.height;
+const Width = gameBoard.width;
+const Height = gameBoard.height;
 const gameBackground = "black";
 const player1Color = "red";
 const player2Color = "lightblue";
@@ -13,23 +13,24 @@ const paddleSpeed = 50;
 
 let intervalID;
 let ballSpeed = 1;
-let ballX = width/2;
-let ballY = height/2;
+let ballX = Width/2;
+let ballY = Height/2;
 let directionX = 0;
 let directionY = 0;
-
+let player1Score = 0;
+let player2Score = 0;
 let player1 = {
     width: 25,
     height:100,
     x:0,
-    y:0,
+    y:Height/2 - 100,
 }
 
 let player2 = {
     width: 25,
     height: 100,
-    x: width - 25,
-    y: 0,
+    x: Width - 25,
+    y: Height/2 - 100,
 }
 
 window.addEventListener("keydown", changeDirection);
@@ -38,19 +39,17 @@ reset.addEventListener("click", resetGame);
 gameStart();
 
 function gameStart(){
+    createBall();
     Tick();
-
-    if(checkCollision()){
-        changeDirection();
-    }
 };
 
 function Tick(){
-    intervalID = setTimeout (() => {
+    intervalID = setTimeout (() => {    
         clearBoard();
         drawPaddle();
-        drawBall(ballX, ballY);
+        updateScore();
         moveBall();
+        drawBall(ballX, ballY);
         checkCollision();
         Tick();
     }, 10)
@@ -58,13 +57,35 @@ function Tick(){
 
 function clearBoard(){
     ctx.fillStyle = gameBackground;
-    ctx.fillRect(0,0,width,height);
+    ctx.fillRect(0,0,Width,Height);
 };
 
-function resetGame(){};
+function resetGame(){
+    player1Score = 0;
+    player2Score = 0;
+
+    player1 = {
+        width: 25,
+        height:100,
+        x:0,
+        y:Height/2 - 100,
+    }
+    player2 = {
+        width: 25,
+        height: 100,
+        x: Width - 25,
+        y: Height/2 - 100,
+    }
+    ballSpeed = 1;
+    ballX = Width/2;
+    ballY = Height/2;
+    createBall();
+    updateScore();
+    clearInterval(intervalID);
+    gameStart();
+};
 
 function drawPaddle(){
-    ctx.strokeStyle = paddleBorder;
 
     ctx.fillStyle = player1Color;
     ctx.fillRect(player1.x, player1.y, player1.width, player1.height);
@@ -90,8 +111,8 @@ function createBall(){
     else{
         directionY = -1;
     }
-    ballX = width/2;
-    ballY = height/2;
+    ballX = Width/2;
+    ballY = Height/2;
 
     drawBall(ballX, ballY);
 };
@@ -100,9 +121,13 @@ function drawBall(ballX, ballY){
     ctx.fillStyle = ballColor;
     ctx.beginPath();
     ctx.arc(ballX, ballY, ballSize, 0, 2 * Math.PI);
+    ctx.fill();
 };
 
-function moveBall(){};
+function moveBall(){
+    ballX +=(ballSpeed * directionX);
+    ballY += (ballSpeed * directionY);
+};
 
 
 function changeDirection(event){
@@ -119,7 +144,7 @@ function changeDirection(event){
             }
             break;
         case (p1Down):
-            if(player1.y < height - player1.height){
+            if(player1.y < Height - player1.height){
                 player1.y += paddleSpeed;
             }
             break;
@@ -130,13 +155,45 @@ function changeDirection(event){
             }
             break;
         case(p2Down):
-            if(player2.y < height - player2.height){
+            if(player2.y < Height - player2.height){
                 player2.y += paddleSpeed;
             }
             break;
     }
 };
 
-function checkCollision(){};
+function checkCollision(){
+    if(ballX <= 0 + ballSize || ballX >= Width - ballSize){
+        directionX *= -1;
+    }
+    if(ballY >= Height - ballSize || ballY <= 0 + ballSize){
+        directionY *= -1;
+    }
+    if(ballX <= 0 + ballSize){
+        player2Score += 1;
+        createBall();
+    }
+    if(ballX >= Width - ballSize){
+        player1Score += 1;
+        createBall();
+    }
 
-function updateScore(){};
+    if(ballX <= player1.x + player1.width + ballSize){
+        if(ballY > player1.y && ballY < player1.y + player1.height){
+            ballX = player1.x + player1.width + ballSize;
+            directionX *= -1;
+            ballSpeed += 0.5;
+        }
+    }
+    if(ballX > player2.x - ballSize){
+        if(ballY > player2.y && ballY < player2.y + player2.height){
+            ballX = player2.x - ballSize;
+            directionX *= -1;
+            ballSpeed += 0.5;
+        }
+    }
+};
+
+function updateScore(){
+    scores.textContent = `${player1Score} : ${player2Score}`;
+};
