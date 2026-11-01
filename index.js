@@ -2,6 +2,7 @@ const gameBoard = document.querySelector("#gameBoard");
 const ctx = gameBoard.getContext("2d");
 const scores = document.querySelector("#scoreText");
 const reset = document.querySelector("#reset");
+const start = document.querySelector("#start");
 const Width = gameBoard.width;
 const Height = gameBoard.height;
 const gameBackground = "black";
@@ -23,18 +24,19 @@ let player1 = {
     width: 25,
     height:100,
     x:0,
-    y:Height/2 - 100,
+    y:Height/2 - 50,
 }
 
 let player2 = {
     width: 25,
     height: 100,
     x: Width - 25,
-    y: Height/2 - 100,
+    y: Height/2 - 50,
 }
 
 window.addEventListener("keydown", changeDirection);
 reset.addEventListener("click", resetGame);
+start.addEventListener("click", startGame);
 
 gameStart();
 
@@ -60,23 +62,28 @@ function clearBoard(){
     ctx.fillRect(0,0,Width,Height);
 };
 
+function startGame(){
+    ballSpeed = 1;
+}
+
 function resetGame(){
     player1Score = 0;
     player2Score = 0;
+    ballSpeed = 0;
 
     player1 = {
         width: 25,
         height:100,
         x:0,
-        y:Height/2 - 100,
+        y:Height/2 - 50,
     }
     player2 = {
         width: 25,
         height: 100,
         x: Width - 25,
-        y: Height/2 - 100,
+        y: Height/2 - 50,
     }
-    ballSpeed = 1;
+    ballSpeed = 0;
     ballX = Width/2;
     ballY = Height/2;
     createBall();
@@ -97,7 +104,6 @@ function drawPaddle(){
 };
 
 function createBall(){
-    ballSpeed = 1;
     if(Math.round(Math.random())== 1){
         directionX = 1;
     }
@@ -128,7 +134,6 @@ function moveBall(){
     ballX +=(ballSpeed * directionX);
     ballY += (ballSpeed * directionY);
 };
-
 
 function changeDirection(event){
     const keyPress = event.keyCode;

@@ -1,5 +1,4 @@
 #gameBoard{
-    text-align: center;
     border: 2px solid white;
 }
 
@@ -10,13 +9,59 @@ body{
     color: white;
 }
 
-#reset{
-    width:200px;
-    height: 100px;
+#reset, #start{
+    width:120px;
+    height: 70px;
+    border-radius: 20px;
+}
+
+Button{
     font-size: 26px;
     cursor:pointer;
-    border: 2px solid white;
-    border-radius: 20px;
+}
+
+#reset{
+    background-color:rgba(255, 0, 0, 0.86);
+    font-Weight:bold;
+    color:rgb(65, 1, 1);
+    border: 2px solid rgb(65, 1, 1);
+}
+
+#start{
+    background-color:rgb(93, 253, 0);
+    font-Weight:bold;
+    color:rgb(8, 58, 2);
+    border: 2px solid rgb(8, 58, 2);
+}
+
+#startreset{
+    width:20%;
+    margin:auto;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+}
+
+#AbilitySelector{
+    text-align:center;
+    align-items:center;
+}
+
+td,th,tr{
+    padding: 10px;
+    border:2px solid white;
+}
+
+#AbilitySelector{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+}
+
+#AbilitySelector button{
     background-color:black;
     color:white;
+    font-weight:bold;
+    border:none;
 }
