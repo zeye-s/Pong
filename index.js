@@ -79,6 +79,8 @@ function resetGame(){
     P2Status.textContent = "Ready";
     p1Cooldown = 0;
     p2Cooldown = 0;
+    player1Bar.classList.add("ready");
+    player2Bar.classList.add("ready");
 
     player1 = {
         width: 25,
@@ -223,9 +225,9 @@ function checkCollision(){
                 updateScore();
                 explode = false;
             }
-            
         }
     }
+
     if(ballX > player2.x - ballSize){
         if(ballY > player2.y && ballY < player2.y + player2.height){
             ballX = player2.x - ballSize;
@@ -249,6 +251,9 @@ const P1 = document.querySelectorAll("#P1");
 const P2 = document.querySelectorAll("#P2");
 const P1Status = document.querySelector("#P1Status");
 const P2Status = document.querySelector("#P2Status");
+const player1Bar = document.querySelector("#player1Bar");
+const player2Bar = document.querySelector("#player2Bar");
+
 
 let player1Ability = p1a1Button;
 let player2Ability = p2a1Button;
@@ -260,6 +265,9 @@ let p2Cooldown = 0;
 let grace = false;
 let frenzy = false;
 let explode = false;
+let maxCooldown = 60;
+let timePassed = 0;
+let percentage = (timePassed/ maxCooldown) * 100;
 
 p1a1Button.addEventListener("click", selectAbilityP1A1);
 
@@ -343,9 +351,13 @@ function p1a1(){
         player2Speed = 0;
 
         p1Cooldown = 60;
+        player1Bar.classList.remove("ready");
+        player1Bar.style.width = "0%";
         P1Status.textContent = p1Cooldown + "s";
         let countdown = setInterval(() => {
             p1Cooldown --;
+            timePassed = maxCooldown - p1Cooldown;
+            player1Bar.style.width = percentage + "%";
             P1Status.textContent = p1Cooldown + "s";
             if(p1Cooldown <= 0){
                 player1InCd = false;
@@ -365,6 +377,7 @@ function p1a1(){
 function p1a2(){
     if(!player1InCd){
         player1InCd = true;
+
         p1Cooldown = 60;
         P1Status.textContent = p1Cooldown + "s";
         ballSpeed = 0.5;
