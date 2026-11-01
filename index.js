@@ -204,3 +204,73 @@ function checkCollision(){
 function updateScore(){
     scores.textContent = `${player1Score} : ${player2Score}`;
 };
+
+const p1a1 = document.querySelector("#P1A1");
+const p1a2 = document.querySelector("#P1A2");
+const p1a3 = document.querySelector("#P1A3");
+const p2a1 = document.querySelector("#P2A1");
+const p2a2 = document.querySelector("#P2A2");
+const p2a3 = document.querySelector("#P2A3");
+
+p1a1.addEventListener("click", selectAbilityP1A1);
+p1a2.addEventListener("click", selectAbilityP1A2);
+p1a3.addEventListener("click", selectAbilityP1A3);
+p2a1.addEventListener("click", selectAbilityP2A1);
+p2a2.addEventListener("click", selectAbilityP2A2);
+p2a3.addEventListener("click", selectAbilityP2A3);
+window.addEventListener("keydown", ActivateAbility);
+
+let player1Ability = p1a1;
+let player2Ability = p2a1;
+
+function selectAbilityP1A1(){
+    player1Ability = p1a1;
+}
+function selectAbilityP1A2(){
+    player1Ability = p1a2;
+}
+function selectAbilityP1A3(){
+    player1Ability = p1a3;
+}
+
+function selectAbilityP2A1(){
+    player2Ability = p2a1;
+}
+function selectAbilityP2A2(){
+    player2Ability = p2a2;
+}
+function selectAbilityP2A3(){
+    player2Ability = p2a3;
+}
+
+function ActivateAbility(event){
+    let keyPressed = event.keyCode;
+    switch(player1Ability){
+        case(p1a1):
+            if(keyPressed == 68){
+                p1a1();
+            }
+        case(p1a2):
+            if(keyPressed == 68){
+                p1a2();
+            }
+        case(p1a3):
+            if(keyPressed == 68){
+                p1a3();
+            }
+    }
+    switch(player2Ability){
+        case(p2a1):
+            if(keyPressed == 39){  
+                p2a1();
+            }
+        case(p2a2):
+            if(keyPressed == 39){
+                p2a2();
+            }
+        case(p2a3):
+            if(keyPressed == 39){
+                p2a3();
+            }
+    }
+}
