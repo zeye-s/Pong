@@ -108,7 +108,7 @@ td,th,tr{
         box-shadow: 0 0 5px white, 0 0 10px lightblue;
     }
     to{
-        box-shadow: 0 0 15px orange, 0 0 10 red;
+        box-shadow: 0 0 15px lightskyblue, 0 0 10 aqua;
     }
 }
 
