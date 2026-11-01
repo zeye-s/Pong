@@ -267,6 +267,7 @@ let frenzy = false;
 let explode = false;
 let maxCooldown = 60;
 let timePassed = 0;
+let timePassed2 = 0;
 let percentage = (timePassed/ maxCooldown) * 100;
 
 p1a1Button.addEventListener("click", selectAbilityP1A1);
@@ -362,6 +363,8 @@ function p1a1(){
             if(p1Cooldown <= 0){
                 player1InCd = false;
                 P1Status.textContent = "Ready";
+                player1Bar.style.width = "100%";
+                player1Bar.classList.add("ready");
                 clearInterval(countdown);
                 countdown = undefined;
             }
@@ -377,16 +380,22 @@ function p1a1(){
 function p1a2(){
     if(!player1InCd){
         player1InCd = true;
+        ballSpeed = 0.5;
 
         p1Cooldown = 60;
+        player1Bar.classList.remove("ready");
+        player1Bar.style.width = "0%";
         P1Status.textContent = p1Cooldown + "s";
-        ballSpeed = 0.5;
         let countdown = setInterval(() => {
             p1Cooldown --;
+            timePassed = maxCooldown - p1Cooldown;
+            player1Bar.style.width = percentage + "%";
             P1Status.textContent = p1Cooldown + "s";
             if(p1Cooldown <= 0){
                 player1InCd = false;
                 P1Status.textContent = "Ready";
+                player1Bar.style.width = "100%";
+                player1Bar.classList.add("ready");
                 clearInterval(countdown);
                 countdown = undefined;
             }
@@ -403,16 +412,22 @@ function p1a3(){
     if(!player1InCd){
         frenzy = true;
         ballSpeed = 5;
-
         player1InCd = true;
+
         p1Cooldown = 60;
+        player1Bar.classList.remove("ready");
+        player1Bar.style.width = "0%";
         P1Status.textContent = p1Cooldown + "s";
         let countdown = setInterval(() => {
             p1Cooldown --;
+            timePassed = maxCooldown - p1Cooldown;
+            player1Bar.style.width = percentage + "%";
             P1Status.textContent = p1Cooldown + "s";
             if(p1Cooldown <= 0){
                 player1InCd = false;
                 P1Status.textContent = "Ready";
+                player1Bar.style.width = "100%";
+                player1Bar.classList.add("ready");
                 clearInterval(countdown);
                 countdown = undefined;
             }
@@ -428,16 +443,23 @@ function p1a3(){
 function p2a1(){
     if(!player2InCd){
         player2.height = 250;
-
         player2InCd = true;
+
+
         p2Cooldown = 60;
+        player2Bar.classList.remove("ready");
+        player2Bar.style.width = "0%";
         P2Status.textContent = p2Cooldown + "s";
         let countdown = setInterval(() => {
             p2Cooldown --;
+            timePassed2 = maxCooldown - p2Cooldown;
+            player2Bar.style.width = percentage + "%";
             P2Status.textContent = p2Cooldown + "s";
             if(p2Cooldown <= 0){
                 player2InCd = false;
                 P2Status.textContent = "Ready";
+                player2Bar.style.width = "100%";
+                player2Bar.classList.add("ready");
                 clearInterval(countdown);
                 countdown = undefined;
             }
@@ -454,15 +476,20 @@ function p2a2(){
     if(!player2InCd){
         explode = true;
 
-        player2InCd = true;
         p2Cooldown = 60;
+        player2Bar.classList.remove("ready");
+        player2Bar.style.width = "0%";
         P2Status.textContent = p2Cooldown + "s";
         let countdown = setInterval(() => {
             p2Cooldown --;
-            P2Status.textContent = cooldown + "s";
+            timePassed2 = maxCooldown - p2Cooldown;
+            player2Bar.style.width = percentage + "%";
+            P2Status.textContent = p2Cooldown + "s";
             if(p2Cooldown <= 0){
                 player2InCd = false;
                 P2Status.textContent = "Ready";
+                player2Bar.style.width = "100%";
+                player2Bar.classList.add("ready");
                 clearInterval(countdown);
                 countdown = undefined;
             }
@@ -477,18 +504,24 @@ function p2a3(){
         grace = true;
 
         p2Cooldown = 60;
+        player2Bar.classList.remove("ready");
+        player2Bar.style.width = "0%";
         P2Status.textContent = p2Cooldown + "s";
         let countdown = setInterval(() => {
             p2Cooldown --;
+            timePassed2 = maxCooldown - p2Cooldown;
+            player2Bar.style.width = percentage + "%";
             P2Status.textContent = p2Cooldown + "s";
             if(p2Cooldown <= 0){
                 player2InCd = false;
                 P2Status.textContent = "Ready";
+                player2Bar.style.width = "100%";
+                player2Bar.classList.add("ready");
                 clearInterval(countdown);
                 countdown = undefined;
             }
         }, 1000);
-
+        
         p2a3Timeout = setTimeout(() => {
             grace = false;
             p2a3Timeout = undefined;
