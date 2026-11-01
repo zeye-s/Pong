@@ -46,7 +46,7 @@ function gameStart(){
 };
 
 function Tick(){
-    intervalID = setTimeout (() => {    
+    intervalID = setTimeout (() => {  
         clearBoard();
         drawPaddle();
         updateScore();
@@ -176,10 +176,12 @@ function checkCollision(){
     }
     if(ballX <= 0 + ballSize){
         player2Score += 1;
+        ballSpeed = 1;
         createBall();
     }
     if(ballX >= Width - ballSize){
         player1Score += 1;
+        ballSpeed = 1;
         createBall();
     }
 
