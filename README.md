@@ -1,4 +1,11 @@
 # Pong
-A pong game as the name suggests. Pong is built using the classic HTML, CSS, and JS combo. AI was used in this project for either debugging or styling. You play this like a traditional pong game except each player has their own abilities. Abilities are not inter-changable between players so pick whichever player you want. Player 1 uses wasd and player 2 uses ijkl. If you press the question mark next to the title, you can access the guide page which tells you more about the abilities. The score board is below the gameboard and there is no cap to how many points you can get so feel free to determine the goal score with your friends. When resetted, the ball speed will be set to 0 until start is pressed so don't feel pressured to start. 
+A pong game as the name suggests. 
+Pong is built using the classic HTML, CSS, and JS combo. AI was used in this project for either debugging or styling. 
+You play this like a traditional pong game except each player has their own abilities.
+Abilities are not inter-changable between players so pick whichever player you want. 
+Player 1 uses wasd and player 2 uses ijkl. 
+If you press the question mark next to the title, you can access the guide page which tells you more about the abilities.
+The score board is below the gameboard and there is no cap to how many points you can get so feel free to determine the goal score with your friends.
+When resetted, the ball speed will be set to 0 until start is pressed so don't feel pressured to start. 
 
 access the game using this link: https://zeye-s.github.io/Pong/
